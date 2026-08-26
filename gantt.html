@@ -1,0 +1,912 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore Media Automation Roadmap (2026)</title>
+<style>
+  :root{
+    --purple-header:#4b3fa5;
+    --purple-light:#c9c1f2;
+    --purple-bar:#a99bec;
+    --peach-light:#f9cfc8;
+    --peach-bar:#f2a99f;
+    --amber-light:#fcd9a0;
+    --amber-bar:#f5b95e;
+    --teal-light:#a8e6cf;
+    --teal-bar:#6fd6ab;
+    --border:#e3e3ee;
+    --text-dark:#211f36;
+    --col-project:150px;
+    --col-phase:120px;
+    --col-task:360px;
+    --col-date:78px;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{
+    height:100%;
+    overflow:hidden;
+  }
+
+  body{
+    margin:0;
+    padding:clamp(12px, 2.5vw, 32px) clamp(10px, 2vw, 24px);
+    background:#ffffff;
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    color:var(--text-dark);
+    height:100%;
+    overflow:hidden;
+  }
+
+  .chart-wrap{
+    max-width:1650px;
+    width:100%;
+    height:100%;
+    margin:0 auto;
+    border:1.5px solid #111;
+    border-radius:6px;
+    padding:clamp(14px, 2.2vw, 26px) clamp(12px, 2vw, 30px) clamp(18px, 2.5vw, 34px);
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    box-sizing:border-box;
+  }
+
+  .table-scroll{
+    overflow:auto;
+    flex:1;
+    min-height:0;
+    border:1px solid var(--border);
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+  }
+
+  .scroll-hint{
+    display:none;
+    margin:0 0 10px;
+    font-size:12px;
+    color:#5a5670;
+    text-align:center;
+    flex-shrink:0;
+  }
+
+  h1{
+    text-align:center;
+    font-size:clamp(18px, 3.2vw, 26px);
+    font-weight:700;
+    margin:0 0 clamp(12px, 2vw, 20px);
+    letter-spacing:0.2px;
+    line-height:1.25;
+    flex-shrink:0;
+  }
+
+  .legend{
+    max-width:560px;
+    margin:0 auto 26px;
+    background:#f7f7fb;
+    border:1px solid #ececf5;
+    border-radius:10px;
+    padding:14px 20px 16px;
+    text-align:center;
+    flex-shrink:0;
+  }
+
+  .legend-title{
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:10px;
+  }
+
+  .legend-items{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:22px;
+    flex-wrap:wrap;
+    font-size:13px;
+    font-weight:600;
+  }
+
+  .legend-items span{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+  }
+
+  .swatch{
+    width:14px;
+    height:14px;
+    border-radius:3px;
+    display:inline-block;
+  }
+
+  .swatch.p1{background:var(--purple-bar);}
+  .swatch.p2{background:var(--peach-bar);}
+  .swatch.p3{background:var(--amber-bar);}
+  .swatch.p4{background:var(--teal-bar);}
+
+  .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#3aa142;
+    display:inline-block;
+  }
+
+  table{
+    border-collapse:collapse;
+    width:max(100%, calc(var(--col-project) + var(--col-phase) + var(--col-task) + (12 * var(--col-date))));
+    min-width:calc(var(--col-project) + var(--col-phase) + var(--col-task) + (12 * var(--col-date)));
+    table-layout:fixed;
+    font-size:13px;
+  }
+
+  th, td{
+    border:1px solid var(--border);
+    padding:0;
+  }
+
+  thead th{
+    background:var(--purple-header);
+    color:#fff;
+    font-size:12.5px;
+    font-weight:700;
+    text-align:left;
+    padding:10px 12px;
+    position:sticky;
+    top:0;
+    z-index:5;
+  }
+
+  thead th.date-col{
+    text-align:center;
+    white-space:nowrap;
+    padding:10px 4px;
+  }
+
+  col.project-col{width:var(--col-project);}
+  col.phase-col{width:var(--col-phase);}
+  col.task-col{width:var(--col-task);}
+  col.date-col{width:var(--col-date);}
+
+  /* Freeze Project / Phase / Task while timeline scrolls horizontally */
+  thead th:nth-child(1),
+  td.project-cell{
+    position:sticky;
+    left:0;
+    z-index:3;
+  }
+  thead th:nth-child(2),
+  td.phase-cell{
+    position:sticky;
+    left:var(--col-project);
+    z-index:3;
+  }
+  thead th:nth-child(3),
+  td.task-cell{
+    position:sticky;
+    left:calc(var(--col-project) + var(--col-phase));
+    z-index:3;
+    background:#fff;
+  }
+  thead th:nth-child(1),
+  thead th:nth-child(2),
+  thead th:nth-child(3){
+    z-index:6;
+    background:var(--purple-header);
+  }
+
+  td.project-cell{
+    font-weight:700;
+    font-size:13px;
+    color:#3d2f8f;
+    text-align:center;
+    vertical-align:middle;
+    padding:10px 4px;
+  }
+
+  td.project-cell .rot{
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    white-space:nowrap;
+    letter-spacing:0.2px;
+  }
+
+  .proj-1{background:#eae7fb;}
+  .proj-2{background:#fbe6ee;}
+  .proj-3{background:#e6f4ea;}
+  .proj-4{background:#f3eefb;}
+
+  td.phase-cell{
+    vertical-align:middle;
+    padding:10px 12px;
+    font-weight:700;
+    font-size:13px;
+    line-height:1.35;
+  }
+
+  td.phase-cell span.sub{
+    display:block;
+    font-weight:400;
+    font-size:11.5px;
+    color:#3a3550;
+    margin-top:1px;
+  }
+
+  .phase-1{background:var(--purple-light);}
+  .phase-2{background:var(--peach-light);}
+  .phase-3{background:var(--amber-light);}
+  .phase-4{background:var(--teal-light);}
+
+  td.task-cell{
+    padding:8px 12px;
+    font-size:12.8px;
+    line-height:1.4;
+  }
+
+  td.task-cell .dot{
+    margin-right:7px;
+    vertical-align:middle;
+    flex-shrink:0;
+  }
+
+  td.task-cell .task-row{
+    display:flex;
+    align-items:flex-start;
+  }
+
+  td.task-cell .dot{
+    margin-top:5px;
+  }
+
+  td.date-cell{
+    text-align:center;
+    vertical-align:middle;
+    padding:6px;
+  }
+
+  .bar{
+    height:22px;
+    border-radius:11px;
+    margin:0 4px;
+  }
+
+  .bar.p1{background:var(--purple-bar);}
+  .bar.p2{background:var(--peach-bar);}
+  .bar.p3{background:var(--amber-bar);}
+  .bar.p4{background:var(--teal-bar);}
+
+  tbody tr:nth-last-child(1) td{border-bottom:1px solid var(--border);}
+
+  /* ---- Tablet ---- */
+  @media (max-width:1100px){
+    :root{
+      --col-project:110px;
+      --col-phase:96px;
+      --col-task:260px;
+      --col-date:64px;
+    }
+
+    .legend{
+      margin-bottom:18px;
+      padding:12px 14px;
+    }
+
+    .legend-items{
+      gap:14px 18px;
+      font-size:12px;
+    }
+
+    thead th{
+      font-size:11.5px;
+      padding:8px 8px;
+    }
+
+    td.phase-cell{
+      padding:8px;
+      font-size:12px;
+    }
+
+    td.task-cell{
+      padding:7px 8px;
+      font-size:12px;
+    }
+
+    .bar{
+      height:18px;
+      border-radius:9px;
+      margin:0 2px;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width:760px){
+    :root{
+      --col-project:44px;
+      --col-phase:78px;
+      --col-task:200px;
+      --col-date:56px;
+    }
+
+    .scroll-hint{display:block;}
+
+    .legend{
+      margin-bottom:12px;
+      padding:10px 12px;
+    }
+
+    .legend-title{font-size:12px; margin-bottom:8px;}
+    .legend-items{gap:10px 14px; font-size:11.5px;}
+
+    .table-scroll{
+      border-radius:4px;
+    }
+
+    thead th{
+      font-size:10.5px;
+      padding:8px 6px;
+    }
+
+    thead th.date-col{
+      font-size:10px;
+      padding:8px 2px;
+    }
+
+    td.project-cell{
+      font-size:11px;
+      padding:6px 2px;
+    }
+
+    td.phase-cell{
+      padding:6px;
+      font-size:11px;
+    }
+
+    td.phase-cell span.sub{
+      font-size:10px;
+    }
+
+    td.task-cell{
+      padding:6px;
+      font-size:11.5px;
+    }
+
+    td.date-cell{padding:4px;}
+
+    .bar{
+      height:16px;
+      border-radius:8px;
+      margin:0 1px;
+    }
+
+    /* Keep only Task sticky so timeline stays usable */
+    thead th:nth-child(1),
+    td.project-cell,
+    thead th:nth-child(2),
+    td.phase-cell{
+      position:static;
+      left:auto;
+      z-index:auto;
+    }
+
+    thead th:nth-child(1),
+    thead th:nth-child(2){
+      position:sticky;
+      top:0;
+      z-index:5;
+      background:var(--purple-header);
+    }
+
+    thead th:nth-child(3),
+    td.task-cell{
+      left:0;
+      box-shadow:2px 0 6px rgba(33,31,54,0.08);
+    }
+  }
+
+  @media (max-width:480px){
+    :root{
+      --col-project:36px;
+      --col-phase:68px;
+      --col-task:168px;
+      --col-date:50px;
+    }
+
+    .chart-wrap{
+      border-radius:4px;
+      padding:12px 8px 16px;
+    }
+
+    td.project-cell .rot{
+      font-size:10px;
+      letter-spacing:0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="chart-wrap">
+  <h1>Explore Media Automation Roadmap (2026)</h1>
+
+  <div class="legend">
+    <div class="legend-title">Timeline &amp; Project Schedule Legend</div>
+    <div class="legend-items">
+      <span><i class="swatch p1"></i>Phase 1</span>
+      <span><i class="swatch p2"></i>Phase 2</span>
+      <span><i class="swatch p3"></i>Phase 3</span>
+      <span><i class="swatch p4"></i>Phase 4</span>
+      <span><i class="dot"></i>Standard Track</span>
+    </div>
+  </div>
+
+  <p class="scroll-hint">Swipe sideways to explore the timeline →</p>
+  <div class="table-scroll">
+  <table>
+    <colgroup>
+      <col class="project-col">
+      <col class="phase-col">
+      <col class="task-col">
+      <col class="date-col"><col class="date-col"><col class="date-col"><col class="date-col">
+      <col class="date-col"><col class="date-col"><col class="date-col"><col class="date-col">
+      <col class="date-col"><col class="date-col">
+      <col class="date-col"><col class="date-col">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Phase</th>
+        <th>Automation Task Breakdown</th>
+        <th class="date-col">24 Jun</th>
+        <th class="date-col">1 Jul</th>
+        <th class="date-col">8 Jul</th>
+        <th class="date-col">15 Jul</th>
+        <th class="date-col">22 Jul</th>
+        <th class="date-col">29 Jul</th>
+        <th class="date-col">5 Aug</th>
+        <th class="date-col">12 Aug</th>
+        <th class="date-col">19 Aug</th>
+        <th class="date-col">26 Aug</th>
+        <th class="date-col">2 Sep</th>
+        <th class="date-col">9 Sep</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- ===================== PROJECT 1: Client Health Dashboard ===================== -->
+
+      <!-- Phase 1: Foundation -->
+      <tr>
+        <td class="project-cell proj-1" rowspan="11"><span class="rot">Client Health Dashboard</span></td>
+        <td class="phase-cell phase-1" rowspan="3">Phase 1<span class="sub">Foundation</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Backend Foundation &amp; Database Architecture</span></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Authentication &amp; Security Layer</span></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Global Client Search &amp; Directory Setup</span></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 2: Core Engine -->
+      <tr>
+        <td class="phase-cell phase-2" rowspan="3">Phase 2<span class="sub">Core Engine</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Google Analytics (GA4) &amp; GSC Integrations</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Google Ads &amp; GBP Ecosystems</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Per-Client Analytics Workspace Setup</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 3: AI Intelligence -->
+      <tr>
+        <td class="phase-cell phase-3" rowspan="4">Phase 3<span class="sub">AI Intelligence</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Health Score &amp; Retention Risk Engine</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Advanced Suite (ClickUp, GHL, MailChimp, SEO Overview, Social Performance, Call Transcript)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>AI Sentiment Analysis &amp; Recommendations</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Executive Dashboard UI &amp; Analytics Views</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 4: Launch -->
+      <tr>
+        <td class="phase-cell phase-4" rowspan="1">Phase 4<span class="sub">Launch</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Testing, Optimization &amp; Railway Deployment</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p4"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- ===================== PROJECT 2: LSA / SEM Call Analyzer ===================== -->
+
+      <!-- Phase 1: API Pipeline -->
+      <tr>
+        <td class="project-cell proj-2" rowspan="10"><span class="rot">LSA / SEM Call Analyzer</span></td>
+        <td class="phase-cell phase-1" rowspan="3">Phase 1<span class="sub">API Pipeline</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>FastAPI &amp; PostgreSQL Backend Design</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Google LSA API Core Collection Polling</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Account Sync &amp; Dashboard Ingestion</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 2: AI Transcripts -->
+      <tr>
+        <td class="phase-cell phase-2" rowspan="3">Phase 2<span class="sub">AI Transcripts</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Celery Workers Background Architecture</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>AI analysis and processing</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>User can book or not book the call</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 3: Portal Dev -->
+      <tr>
+        <td class="phase-cell phase-3" rowspan="3">Phase 3<span class="sub">Portal Dev</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>GoHighLevel Webhooks Integration</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>React SPA Interface Portal</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Call analyser proper dashboard with all feature</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 4: Deploy -->
+      <tr>
+        <td class="phase-cell phase-4" rowspan="1">Phase 4<span class="sub">Deploy</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>QA Validation, Optimization &amp; Railway Deploy</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p4"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- ===================== PROJECT 3: Service Page Optimisation ===================== -->
+
+      <!-- Phase 1: Discovery -->
+      <tr>
+        <td class="project-cell proj-3" rowspan="12"><span class="rot">Service Page Optimisation</span></td>
+        <td class="phase-cell phase-1" rowspan="2">Phase 1<span class="sub">Discovery</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Build the algorithm that detects and classifies service pages</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Set up the database to store pages, results, and jobs</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 2: Dashboard -->
+      <tr>
+        <td class="phase-cell phase-2" rowspan="4">Phase 2<span class="sub">Dashboard</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Build the core endpoints that run and track each analysis job</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Build the client dashboard endpoint (scores, trust signals, priority pages)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Build the per-page report endpoint (content gaps &amp; rewrite suggestions)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Connect SEO API for competitor &amp; gap analysis</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 3: Optimisation -->
+      <tr>
+        <td class="phase-cell phase-3" rowspan="4">Phase 3<span class="sub">Optimisation</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Review and fine-tune the scoring &amp; classification logic</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Add authentication &amp; access control</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Add concurrency handling &amp; rate limits</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Add guardrails, error handling &amp; retry logic</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 4: Testing & Deployment -->
+      <tr>
+        <td class="phase-cell phase-4" rowspan="2">Phase 4<span class="sub">Testing &amp; Deployment</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>QA testing for all test cases</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p4"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Railway deployment &amp; live verification</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+
+      <!-- ===================== PROJECT 4: Content Performance Tracker ===================== -->
+
+      <!-- Phase 1: API Pipeline -->
+      <tr>
+        <td class="project-cell proj-4" rowspan="14"><span class="rot">Content Performance Tracker</span></td>
+        <td class="phase-cell phase-1" rowspan="4">Phase 1<span class="sub">API Pipeline</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Overview API &amp; response schema (ai-maintained)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>GSC / GA4 warehouse KPIs &amp; trend series</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Live on-page HTML audit + URL Inspection</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Snapshot cache table &amp; 24h TTL upsert</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p1"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 2: Dashboard -->
+      <tr>
+        <td class="phase-cell phase-2" rowspan="4">Phase 2<span class="sub">Dashboard</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Client sidebar module &amp; AiMaintainedPanel shell</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Audit &amp; traffic UI (KPI strip, charts, checklist)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>AI recommendations (OpenRouter + fallback)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>History tab — Mailchimp campaign merge</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"><div class="bar p2"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 3: Optimization -->
+      <tr>
+        <td class="phase-cell phase-3" rowspan="4">Phase 3<span class="sub">Optimization</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Split cache refresh (audit vs AI independently)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Defer Mailchimp to History-only fetch</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Parallel warehouse loads &amp; timing logs</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>GSC-mapped empty state &amp; guardrails</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"><div class="bar p3"></div></td>
+        <td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 4: Testing & Deployment -->
+      <tr>
+        <td class="phase-cell phase-4" rowspan="2">Phase 4<span class="sub">Testing &amp; Deployment</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Update Activity Logs / Usage / How-to Guide coverage</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p4"></div></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>QA Testing, Optimization &amp; Railway Deploy</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"><div class="bar p4"></div></td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var scroller = document.querySelector(".table-scroll");
+    if (!scroller) return;
+
+    function scrollToEnd() {
+      scroller.scrollLeft = scroller.scrollWidth;
+      scroller.scrollTop = scroller.scrollHeight;
+    }
+
+    scrollToEnd();
+    window.addEventListener("load", scrollToEnd);
+  })();
+</script>
+
+</body></html>
