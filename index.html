@@ -24,7 +24,11 @@
     --col-phase:120px;
     --col-task:360px;
     --col-date:78px;
-    --date-cols:12;
+    --date-cols:22;
+    --blue-light:#cfe2f8;
+    --blue-bar:#8fb8ea;
+    --pink-light:#f6d3e6;
+    --pink-bar:#e59cc4;
     --font-ui:"Manrope", "Segoe UI", sans-serif;
     --font-display:"Outfit", "Manrope", sans-serif;
     --ease:cubic-bezier(0.22, 1, 0.36, 1);
@@ -74,13 +78,13 @@
 
   .chart-wrap.is-filtered{
     height:auto;
+    max-height:100%;
     min-height:0;
   }
 
   .chart-wrap.is-filtered .table-scroll{
-    flex:none;
+    flex:0 1 auto;
     min-height:0;
-    max-height:none;
   }
 
   .scroll-hint{
@@ -309,6 +313,8 @@
   .swatch.p2{background:var(--peach-bar);}
   .swatch.p3{background:var(--amber-bar);}
   .swatch.p4{background:var(--teal-bar);}
+  .swatch.p5{background:var(--blue-bar);}
+  .swatch.p6{background:var(--pink-bar);}
 
   .dot{
     width:8px;
@@ -431,6 +437,7 @@
   .proj-2{background:#fbe6ee;}
   .proj-3{background:#e6f4ea;}
   .proj-4{background:#f3eefb;}
+  .proj-5{background:#e7f1fb;}
 
   td.phase-cell{
     vertical-align:middle;
@@ -452,6 +459,8 @@
   .phase-2{background:var(--peach-light);}
   .phase-3{background:var(--amber-light);}
   .phase-4{background:var(--teal-light);}
+  .phase-5{background:var(--blue-light);}
+  .phase-6{background:var(--pink-light);}
 
   td.task-cell{
     padding:8px 12px;
@@ -491,6 +500,8 @@
   .bar.p2{background:var(--peach-bar);}
   .bar.p3{background:var(--amber-bar);}
   .bar.p4{background:var(--teal-bar);}
+  .bar.p5{background:var(--blue-bar);}
+  .bar.p6{background:var(--pink-bar);}
 
   td.date-cell:hover .bar{
     transform:scaleY(1.08);
@@ -712,6 +723,7 @@
           <option value="2">LSA / SEM Call Analyzer</option>
           <option value="3">Service Page Optimisation</option>
           <option value="4">Content Performance Tracker</option>
+          <option value="5">Central Dashboard – Phase 2</option>
         </select>
         <p class="date-range" id="automation-date-range" aria-live="polite"></p>
         <button type="button" class="reset-filter is-hidden" id="reset-filter">Reset filter</button>
@@ -725,6 +737,8 @@
         <span><i class="swatch p2"></i>Phase 2</span>
         <span><i class="swatch p3"></i>Phase 3</span>
         <span><i class="swatch p4"></i>Phase 4</span>
+        <span><i class="swatch p5"></i>Phase 5</span>
+        <span><i class="swatch p6"></i>Phase 6</span>
       </div>
     </div>
   </div>
@@ -739,6 +753,9 @@
       <col class="date-col"><col class="date-col"><col class="date-col"><col class="date-col">
       <col class="date-col"><col class="date-col"><col class="date-col"><col class="date-col">
       <col class="date-col"><col class="date-col">
+      <col class="date-col"><col class="date-col">
+      <col class="date-col"><col class="date-col"><col class="date-col"><col class="date-col">
+      <col class="date-col"><col class="date-col"><col class="date-col"><col class="date-col">
       <col class="date-col"><col class="date-col">
     </colgroup>
     <thead>
@@ -758,6 +775,16 @@
         <th class="date-col">26 Aug</th>
         <th class="date-col">2 Sep</th>
         <th class="date-col">9 Sep</th>
+        <th class="date-col">16 Sep</th>
+        <th class="date-col">23 Sep</th>
+        <th class="date-col">30 Sep</th>
+        <th class="date-col">7 Oct</th>
+        <th class="date-col">14 Oct</th>
+        <th class="date-col">21 Oct</th>
+        <th class="date-col">28 Oct</th>
+        <th class="date-col">4 Nov</th>
+        <th class="date-col">11 Nov</th>
+        <th class="date-col">14 Nov</th>
       </tr>
     </thead>
     <tbody data-project="1">
@@ -774,6 +801,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Authentication &amp; Security Layer</span></td>
@@ -782,6 +810,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Global Client Search &amp; Directory Setup</span></td>
@@ -790,6 +819,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 2: Core Engine -->
@@ -802,6 +832,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Google Ads &amp; GBP Ecosystems</span></td>
@@ -811,6 +842,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Per-Client Analytics Workspace Setup</span></td>
@@ -820,6 +852,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 3: AI Intelligence -->
@@ -833,6 +866,7 @@
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Advanced Suite (ClickUp, GHL, MailChimp, SEO Overview, Social Performance, Call Transcript)</span></td>
@@ -843,6 +877,7 @@
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>AI Sentiment Analysis &amp; Recommendations</span></td>
@@ -853,6 +888,7 @@
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Executive Dashboard UI &amp; Analytics Views</span></td>
@@ -863,6 +899,7 @@
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 4: Launch -->
@@ -873,6 +910,7 @@
         <td class="date-cell"><div class="bar p4"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
     </tbody>
@@ -890,6 +928,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Google LSA API Core Collection Polling</span></td>
@@ -898,6 +937,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Account Sync &amp; Dashboard Ingestion</span></td>
@@ -906,6 +946,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 2: AI Transcripts -->
@@ -917,6 +958,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>AI analysis and processing</span></td>
@@ -925,6 +967,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>User can book or not book the call</span></td>
@@ -933,6 +976,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 3: Portal Dev -->
@@ -944,6 +988,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>React SPA Interface Portal</span></td>
@@ -952,6 +997,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Call analyser proper dashboard with all feature</span></td>
@@ -960,6 +1006,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 4: Deploy -->
@@ -971,6 +1018,7 @@
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
     </tbody>
@@ -987,6 +1035,7 @@
         <td class="date-cell"><div class="bar p1"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Set up the database to store pages, results, and jobs</span></td>
@@ -994,6 +1043,7 @@
         <td class="date-cell"><div class="bar p1"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 2: Dashboard -->
@@ -1005,6 +1055,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Build the client dashboard endpoint (scores, trust signals, priority pages)</span></td>
@@ -1013,6 +1064,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Build the per-page report endpoint (content gaps &amp; rewrite suggestions)</span></td>
@@ -1021,6 +1073,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Connect SEO API for competitor &amp; gap analysis</span></td>
@@ -1029,6 +1082,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 3: Optimisation -->
@@ -1039,6 +1093,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Add authentication &amp; access control</span></td>
@@ -1046,6 +1101,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Add concurrency handling &amp; rate limits</span></td>
@@ -1053,6 +1109,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Add guardrails, error handling &amp; retry logic</span></td>
@@ -1060,6 +1117,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 4: Testing & Deployment -->
@@ -1069,6 +1127,7 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p4"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Railway deployment &amp; live verification</span></td>
@@ -1076,6 +1135,7 @@
         <td class="date-cell"><div></div></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
     </tbody>
@@ -1091,24 +1151,28 @@
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p1"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>GSC / GA4 warehouse KPIs &amp; trend series</span></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p1"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Live on-page HTML audit + URL Inspection</span></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p1"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Snapshot cache table &amp; 24h TTL upsert</span></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p1"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 2: Dashboard -->
@@ -1119,6 +1183,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Audit &amp; traffic UI (KPI strip, charts, checklist)</span></td>
@@ -1126,6 +1191,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>AI recommendations (OpenRouter + fallback)</span></td>
@@ -1133,6 +1199,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>History tab — Mailchimp campaign merge</span></td>
@@ -1140,6 +1207,7 @@
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"><div class="bar p2"></div></td>
         <td class="date-cell"></td><td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 3: Optimization -->
@@ -1150,6 +1218,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Defer Mailchimp to History-only fetch</span></td>
@@ -1157,6 +1226,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Parallel warehouse loads &amp; timing logs</span></td>
@@ -1164,6 +1234,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>GSC-mapped empty state &amp; guardrails</span></td>
@@ -1171,6 +1242,7 @@
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"><div class="bar p3"></div></td>
         <td class="date-cell"></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
 
       <!-- Phase 4: Testing & Deployment -->
@@ -1179,11 +1251,203 @@
         <td class="task-cell"><span class="task-row"><i class="dot"></i>Update Activity Logs / Usage / How-to Guide coverage</span></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p4"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
       </tr>
       <tr>
         <td class="task-cell"><span class="task-row"><i class="dot"></i>QA Testing, Optimization &amp; Railway Deploy</span></td>
         <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
         <td class="date-cell"><div class="bar p4"></div></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+    </tbody>
+    <tbody data-project="5" data-range-label="14 Oct – 14 Nov">
+
+      <!-- ===================== PROJECT 5: Central Dashboard – Phase 2 ===================== -->
+
+      <!-- Requirement 2: GBP Calls -->
+      <!-- Phase 1: GBP Integration -->
+      <tr>
+        <td class="project-cell proj-5" rowspan="41"><span class="rot">Central Dashboard – Phase 2</span></td>
+        <td class="phase-cell phase-1" rowspan="4">Phase 1<span class="sub">GBP Integration</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Add GBP as a call source and identify GBP tracking numbers in GoHighLevel</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p1"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Pull GBP calls from GoHighLevel and add AI analysis for booking status, summary, and transcript</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p1"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Backfill historical GBP calls and update KPI, call list, and Excel export APIs</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p1"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Apply role permissions and client restrictions for GBP data</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p1"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 2: GBP UI & Dashboard -->
+      <tr>
+        <td class="phase-cell phase-2" rowspan="4">Phase 2<span class="sub">GBP UI &amp; Dashboard</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Update KPI cards and source filters to support GBP</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p2"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Add GBP calls to call details and Excel export</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p2"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Update dashboard UI and related components for the new GBP data</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p2"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Test against eMConnect Call Report, fix issues, deploy, and complete client review</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p2"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Requirement 1: Role-Based Access -->
+      <!-- Phase 3: RBAC Foundation -->
+      <tr>
+        <td class="phase-cell phase-3" rowspan="7">Phase 3<span class="sub">RBAC Foundation</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Create roles, permissions, and role-permission tables</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Add role to users and invites; add user-to-client mapping</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Seed default roles (Admin, Team Member, Client) and permission list</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Role &amp; permission APIs (list, create, edit, delete roles; list permissions)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Permission check on all existing APIs</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Migrate existing users to default roles (Admin / Team Member)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Store role &amp; permissions after login; add permission helper</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p3"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 4: Team Access Management -->
+      <tr>
+        <td class="phase-cell phase-4" rowspan="9">Phase 4<span class="sub">Team Access Management</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Update invite API to accept role and client assignment</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>User APIs to edit role / assigned clients and remove access</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Log out user immediately when role is changed or access is removed</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Client invite email template and allow any email domain for Client role</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Roles &amp; Permissions section in Team Access tab (roles list)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Create / edit role form with permission checkboxes by module</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Delete role with confirmation (block if role is in use)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Invite Member form with Role dropdown and client selection</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Users list with role, assigned clients, status, edit / remove</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p4"></div></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 5: Permission-Based Dashboard -->
+      <tr>
+        <td class="phase-cell phase-5" rowspan="11">Phase 5<span class="sub">Permission-Based Dashboard</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Login / current-user API returns role, permissions, and assigned clients</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Filter clients, calls, and KPI APIs by assigned clients</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Block restricted actions (reanalyze, settings, team access) by permission</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Scope real-time updates and notifications to the user&#39;s assigned clients</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Excel export limited to the user&#39;s assigned clients</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Activity log for user actions (login, booking status edits, exports)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Sidebar menu based on permissions</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Route protection, access-denied page, and redirect after login</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Show / hide actions (Reanalyze, Export, Edit booking status)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Client switcher shows only assigned clients</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Show who last edited booking status (team or client user)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p5"></div></td><td class="date-cell"></td><td class="date-cell"></td>
+      </tr>
+
+      <!-- Phase 6: Testing & Release -->
+      <tr>
+        <td class="phase-cell phase-6" rowspan="6">Phase 6<span class="sub">Testing &amp; Release</span></td>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>End-to-end testing for Admin, Team Member, and Client roles</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p6"></div></td><td class="date-cell"><div class="bar p6"></div></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Security checks (direct API access, client data isolation) and fixes</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p6"></div></td><td class="date-cell"><div class="bar p6"></div></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Performance check with more users (database indexes, page load, login limits)</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p6"></div></td><td class="date-cell"><div class="bar p6"></div></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>UI fixes and polish</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p6"></div></td><td class="date-cell"><div class="bar p6"></div></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Short user guide for client users</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p6"></div></td><td class="date-cell"><div class="bar p6"></div></td>
+      </tr>
+      <tr>
+        <td class="task-cell"><span class="task-row"><i class="dot"></i>Deployment and client review</span></td>
+        <td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"></td><td class="date-cell"><div class="bar p6"></div></td><td class="date-cell"><div class="bar p6"></div></td>
       </tr>
 
     </tbody>
@@ -1322,7 +1586,12 @@
 
       setDateColumnsVisible(range.start, range.end);
 
-      if (dateHeads[range.start] && dateHeads[range.end]) {
+      var group = document.querySelector('tbody[data-project="' + value + '"]');
+      var customRange = group && group.getAttribute("data-range-label");
+
+      if (customRange) {
+        setRangeText("Timeline: " + customRange);
+      } else if (dateHeads[range.start] && dateHeads[range.end]) {
         var startLabel = dateHeads[range.start].textContent.trim();
         var endLabel = dateHeads[range.end].textContent.trim();
         setRangeText(
